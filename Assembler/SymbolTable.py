@@ -35,6 +35,6 @@ class SymbolTable:
                 continue
             line = str.strip(line)
             if is_l(line):
-                self.symbols[line] = rom_address + 1
+                self.symbols[line[1:-1]] = rom_address
             elif is_a(line) or is_c(line):
                 rom_address += 1

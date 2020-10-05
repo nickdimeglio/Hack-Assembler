@@ -3,7 +3,7 @@ from Parsing import *
 from Translation import *
 """Main file for assembling Hack Assembly Code into binary"""
 
-source = "Max2.asm"
+source = "Max.asm"
 
 # Create a new symbol table, store labels from source code
 symbol_table = SymbolTable()

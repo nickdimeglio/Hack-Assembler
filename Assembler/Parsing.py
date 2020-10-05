@@ -39,14 +39,14 @@ def parse_c(cmd):
     if jump_bound == -1:
         jump = None
     else:
-        jump = cmd[jump_bound]
+        jump = cmd[jump_bound + 1:]
 
     if dest and jump:
         comp = cmd[dest_bound + 1:jump_bound - 1]
     elif dest:
         comp = cmd[dest_bound + 1:]
     elif jump:
-        comp = cmd[:jump_bound - 1]
+        comp = cmd[:jump_bound]
 
 
     parsed = {"Type": "Computation",
