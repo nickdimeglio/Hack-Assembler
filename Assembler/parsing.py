@@ -9,7 +9,7 @@ def remove_comments(string):
     return string
 
 
-# Checking command types
+# For checking command types
 def is_l(cmd):
     return cmd.__contains__('(')
 
@@ -22,11 +22,11 @@ def is_a(cmd):
     return cmd[0] == '@'
 
 
-def has_variable(a_command):
-    return not str.isdigit(str(a_command[1:]))
+def has_variable(address):
+    return not str.isdigit(str(address))
 
 
-# Parsing commands of known types
+# For parsing commands of known types
 def parse_c(cmd):
     dest_bound = cmd.find('=')
     if dest_bound == -1:
@@ -47,7 +47,6 @@ def parse_c(cmd):
         comp = cmd[dest_bound + 1:]
     elif jump:
         comp = cmd[:jump_bound]
-
 
     parsed = {"Type": "Computation",
               "Comp": comp,
@@ -81,7 +80,7 @@ def parse(assembly_code, symbol_table):
 
         # Parse and store A commands
         if is_a(command):
-            if has_variable([command]):
+            if has_variable(command[1:]):
                 if not symbol_table.lookup(command[1:]):
                     symbol_table.append(command[1:], ram_address)
                     ram_address += 1

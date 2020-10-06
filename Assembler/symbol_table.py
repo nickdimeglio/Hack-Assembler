@@ -1,7 +1,5 @@
-from Parsing import *
+from parsing import remove_comments, is_l, is_c, is_a
 """ Functions for assembling Hack Machine Language Code into Binary"""
-
-assembly = 0
 
 
 class SymbolTable:
