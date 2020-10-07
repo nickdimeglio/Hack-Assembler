@@ -1,11 +1,10 @@
-from symbol_table import *
-from translation import *
-from parsing import *
+from symbol_table import SymbolTable
+from parsing import parse
+from translation import translate_address, translate_computation
 import sys
 """Main file for assembling Hack Assembly Code into binary"""
 
 source = sys.argv[1]
-# source = "Pong.asm"
 
 # Create a new symbol table, store labels from source code
 symbol_table = SymbolTable()
@@ -19,10 +18,10 @@ binary = []
 for command in commands:
     if command['Type'] == "Address":
         binary.append(
-           translate_a(command))
+           translate_address(command))
     elif command['Type'] == "Computation":
         binary.append(
-            translate_c(command))
+            translate_computation(command))
 
 # Write list of binary commands to a .hack file
 source_name = source[:str.find(source, ".asm")]

@@ -4,6 +4,7 @@ from parsing import *
     already-parsed Hack Machine Language commands 
     into a list of 16-bit binary commands"""
 
+# Assembly->Binary translation for each portion of a computation command
 comp_codes = {"0": "0101010", "1": "0111111", "-1": "0111010",
               "D": "0001100", "A": "0110000", "!D": "0001101",
               "!A": "0110001", "-D": "0001111", "-A": "0110011",
@@ -20,14 +21,16 @@ jump_codes = {"null": "000", "JGT": "001", "JEQ": "010", "JGE": "011",
               "JLT": "100", "JNE": "101", "JLE": "110", "JMP": "111",}
 
 
-def translate_a(cmd):
+def translate_address(cmd):
+    """Translate a parsed address command into binary"""
     binary = format((int(cmd['Address'])), 'b')
     extra_digits = 16 - len(binary)
     binary = "0" * extra_digits + binary
     return binary
 
 
-def translate_c(cmd):
+def translate_computation(cmd):
+    """Translate a parsed computation command into binary"""
     comp_bits = comp_codes.get(cmd["Comp"])
 
     if cmd["Dest"] in dest_codes:
